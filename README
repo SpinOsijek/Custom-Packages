@@ -1,1 +1,29 @@
-Repozitorij za custom pakete
+# Repozitorij za custom pakete
+
+
+## Proces kreiranja paketa
+
+1. kloniraj repozitorij
+2. uđi u root projekta gdje se nalazi package.json
+
+### Kreiranje novog paketa
+1. `ng generate library naziv-paketa --prefix naziv-prefiksa-za-komponente`
+2. u projects -> naziv-paketa -> lib kreiraš komponente/servise/pipeove...
+2.1. Po potrebi dodaješ u declarations/exports u `naziv-paketa.module.ts`
+2.2. sve što treba biti dostupno iz paketa treba exportati i u `public-api.ts`, po uzoru na ostale pakete
+
+### Kreiranje/update paketa
+1. po potrebi u package.json paketa (projects -> naziv-paketa -> package.json) podići verziju
+2. iz roota projekta `ng build naziv-paketa` -> pojavljuje se folder dist/naziv-paketa
+3. `npm pack ./dist/naziv-paketa` -> u rootu projekta pojavlju se file naziv-paketa-verzija.iz.package.jsona.tgz
+3.1. namjesti naziv filea da bude `naziv-paketa.tgz`
+
+## Postavljanje nove verzije na GitHub
+TODO
+
+## Update projekta koji koristi custom paket
+### Ako je paket već instaliran
+`npm update naziv-paketa`
+### Ako nije instaliran (nije u package.json)
+1. u package.json dodaj: `"naziv-paketa": "https://github.com/SpinOsijek/Custom-Packages/releases/download/latest/naziv-paketa.tgz"`
+2. `npm install`
